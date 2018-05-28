@@ -1,0 +1,29 @@
+{
+    "name": "hubertnnn/jwplatform",
+    "description": "Jwplatform integration",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hubert Narożny",
+            "email": "hubertnnn@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "HubertNNN\\FlowPlayer\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "HubertNNN\\JwPlatform\\Integration\\Laravel\\JwPlatformServiceProvider"
+            ],
+            "aliases": {
+                "FlowPlayer": "HubertNNN\\JwPlatform\\Integration\\Laravel\\JwPlatformFacade"
+            }
+        }
+    }
+}
