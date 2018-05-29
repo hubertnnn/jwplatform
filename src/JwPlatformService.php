@@ -5,7 +5,7 @@ namespace HubertNNN\JwPlatform;
 use HubertNNN\JwPlatform\Modules\PrivateFetcher;
 use HubertNNN\JwPlatform\Modules\Uploader;
 
-class JwPlatformService
+class JwPlatformService implements Contracts\JwPlatformService
 {
     protected $apiKey;
     protected $tokenSecret;
