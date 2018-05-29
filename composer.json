@@ -22,7 +22,7 @@
                 "HubertNNN\\JwPlatform\\Integration\\Laravel\\JwPlatformServiceProvider"
             ],
             "aliases": {
-                "FlowPlayer": "HubertNNN\\JwPlatform\\Integration\\Laravel\\JwPlatformFacade"
+                "JwPlatform": "HubertNNN\\JwPlatform\\Integration\\Laravel\\JwPlatformFacade"
             }
         }
     }
