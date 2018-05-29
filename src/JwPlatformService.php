@@ -2,6 +2,7 @@
 
 namespace HubertNNN\JwPlatform;
 
+use HubertNNN\JwPlatform\Modules\PlayerProvider;
 use HubertNNN\JwPlatform\Modules\PrivateFetcher;
 use HubertNNN\JwPlatform\Modules\Uploader;
 
@@ -9,12 +10,14 @@ class JwPlatformService implements Contracts\JwPlatformService
 {
     protected $apiKey;
     protected $tokenSecret;
+    protected $players;
     protected $fallbackTemplate;
 
-    public function __construct($apiKey, $tokenSecret, $fallbackTemplate = null)
+    public function __construct($apiKey, $tokenSecret, $players, $fallbackTemplate = null)
     {
         $this->apiKey = $apiKey;
         $this->tokenSecret = $tokenSecret;
+        $this->players = $players;
         $this->fallbackTemplate = $fallbackTemplate;
     }
 
@@ -35,6 +38,11 @@ class JwPlatformService implements Contracts\JwPlatformService
     public function getFallbackTemplate()
     {
         return $this->fallbackTemplate;
+    }
+
+    public function getPlayerUrl($player = null)
+    {
+        return (new PlayerProvider($this, $this->players))->getPlayer($player);
     }
 
     public function getUploader()
