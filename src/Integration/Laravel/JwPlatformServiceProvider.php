@@ -29,8 +29,9 @@ class JwPlatformServiceProvider extends ServiceProvider
 
             $apiKey = $config->get('jwplatform.credentials.apiKey');
             $secret = $config->get('jwplatform.credentials.secret');
+            $fallback = $config->get('jwplatform.fallbackTemplate');
 
-            return new JwPlatformService($apiKey, $secret);
+            return new JwPlatformService($apiKey, $secret, $fallback);
         });
     }
 
