@@ -15,6 +15,8 @@ use HubertNNN\JwPlatform\Utils\DateTimeUtils;
  * @property \DateTime $published
  * @property int $duration in seconds
  * @property string $publicUrl
+ * @property string $streamingUrl
+ * @property string $fallbackUrl
  * @property string $image
  * @property string $tinyThumbnail 40px
  * @property string $smallThumbnail 120px
@@ -45,6 +47,9 @@ class Video implements Contracts\Video
     protected $duration;
 
     protected $publicUrl;
+    protected $streamingUrl;
+    protected $fallbackUrl;
+
     protected $image;
     protected $tinyThumbnail;
     protected $smallThumbnail;
@@ -72,9 +77,10 @@ class Video implements Contracts\Video
 
         if($data === null) {
             $endpoint = '/v2/media/' . $this->id;
-            $response = $this->service->getPublicConnection()->get($endpoint, []);
+            $response = $this->service->getPublicConnection()->get($endpoint, [], 30, 10);
             $data = $response->playlist[0];
         }
+        dump($data);
 
         $this->title = $data->title;
         $this->description = $data->description;
@@ -131,6 +137,16 @@ class Video implements Contracts\Video
         $endpoint = '/v2/media/' . $this->id;
         $this->publicUrl = $this->service->getPublicConnection()->getUrl($endpoint, [], 4*3600, 5*60);
 
+
+        $endpoint = '/manifests/' . $this->id . '.m3u8';
+        $this->streamingUrl = $this->service->getPublicConnection()->getUrl($endpoint, []);
+
+        $fallbackTemplate = $this->service->getFallbackTemplate();
+        if($fallbackTemplate !== null) {
+            $endpoint = '/videos/' . $this->id . '-' . $fallbackTemplate . '.mp4';
+            $this->fallbackUrl = $this->service->getPublicConnection()->getUrl($endpoint, [], 24*3600, 12*3600);
+        }
+
         $this->isGeneratedLoaded = true;
     }
 
@@ -140,6 +156,9 @@ class Video implements Contracts\Video
         $loaders = [
             'generated' => [
                 'publicUrl',
+                'streamingUrl',
+                'fallbackUrl',
+
                 'image',
                 'tinyThumbnail',
                 'smallThumbnail',

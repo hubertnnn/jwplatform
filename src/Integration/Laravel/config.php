@@ -16,4 +16,14 @@ return [
         'apiKey' => env('JWPLATFORM_API_KEY'),
         'secret' => env('JWPLATFORM_API_SECRET'),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | JwPlatform fallback template
+    |--------------------------------------------------------------------------
+    |
+    | This template will be used on older browsers that dont support HLS
+    |
+    */
+    'fallbackTemplate' => env('JWPLATFORM_FALLBACK_TEMPLATE'),
 ];

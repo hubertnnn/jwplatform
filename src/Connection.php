@@ -76,7 +76,7 @@ class Connection
             $url = $this->baseUrl . $resource;
         } else {
             $exp = ceil((time() + $validTime)/$normalizationTime) * $normalizationTime;
-            $sig = md5($resource . ':' . $exp . ':' . $this->tokenSecret);
+            $sig = md5(ltrim($resource, '/') . ':' . $exp . ':' . $this->tokenSecret);
 
             $url = $this->baseUrl . $resource . '?exp=' . $exp . '&sig=' . $sig;
         }

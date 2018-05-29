@@ -9,11 +9,13 @@ class JwPlatformService implements Contracts\JwPlatformService
 {
     protected $apiKey;
     protected $tokenSecret;
+    protected $fallbackTemplate;
 
-    public function __construct($apiKey, $tokenSecret)
+    public function __construct($apiKey, $tokenSecret, $fallbackTemplate = null)
     {
         $this->apiKey = $apiKey;
         $this->tokenSecret = $tokenSecret;
+        $this->fallbackTemplate = $fallbackTemplate;
     }
 
     public function getPublicConnection()
@@ -28,6 +30,11 @@ class JwPlatformService implements Contracts\JwPlatformService
         $baseUrl = 'https://api.jwplatform.com';
 
         return new Connection($this, $this->apiKey, $this->tokenSecret, $baseUrl, true);
+    }
+
+    public function getFallbackTemplate()
+    {
+        return $this->fallbackTemplate;
     }
 
     public function getUploader()
