@@ -2,8 +2,8 @@
 
 namespace HubertNNN\JwPlatform;
 
-use Carbon\Carbon;
 use HubertNNN\JwPlatform\Contracts;
+use HubertNNN\JwPlatform\Utils\DateTimeUtils;
 
 /**
  * Class Video
@@ -78,7 +78,7 @@ class Video implements Contracts\Video
 
         $this->title = $data->title;
         $this->description = $data->description;
-        $this->published = Carbon::createFromTimestamp($data->pubdate);
+        $this->published = DateTimeUtils::timestampToDate($data->pubdate);
         $this->duration = $data->duration;
 
         $this->isPublicLoaded = true;
@@ -98,11 +98,11 @@ class Video implements Contracts\Video
 
         $this->title = $data->title;
         $this->description = $data->description;
-        $this->published = Carbon::createFromTimestamp($data->date);
+        $this->published = DateTimeUtils::timestampToDate($data->date);
         $this->duration = (int)floor($data->duration);
 
         $this->status = $data->status;
-        $this->updated = Carbon::createFromTimestamp($data->updated);
+        $this->updated = DateTimeUtils::timestampToDate($data->updated);
         $this->tags = empty($data->tags) ? [] : explode(',', $data->tags);
         $this->error = $data->error;
         $this->md5 = $data->md5;
@@ -223,7 +223,7 @@ class Video implements Contracts\Video
                 continue;
 
             if($value instanceof \DateTime) {
-                $value = $value->getTimestamp();
+                $value = DateTimeUtils::dateToTimestamp($value);
             }
 
             if(is_array($value)) {
