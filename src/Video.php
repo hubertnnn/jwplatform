@@ -3,6 +3,7 @@
 namespace HubertNNN\JwPlatform;
 
 use Carbon\Carbon;
+use HubertNNN\JwPlatform\Contracts;
 
 /**
  * Class Video
@@ -13,6 +14,7 @@ use Carbon\Carbon;
  * @property \DateTime $updated
  * @property \DateTime $published
  * @property int $duration in seconds
+ * @property string $publicUrl
  * @property string $image
  * @property string $tinyThumbnail 40px
  * @property string $smallThumbnail 120px
@@ -24,7 +26,7 @@ use Carbon\Carbon;
  * @property string $md5
  * @property int $size
  */
-class Video
+class Video implements Contracts\Video
 {
     /** @var JwPlatformService */
     protected $service;
@@ -42,6 +44,7 @@ class Video
     protected $published;
     protected $duration;
 
+    protected $publicUrl;
     protected $image;
     protected $tinyThumbnail;
     protected $smallThumbnail;
@@ -59,13 +62,6 @@ class Video
     {
         $this->service = $service;
         $this->id = $id;
-    }
-
-    public function getPublicUrl()
-    {
-        $endpoint = '/v2/media/' . $this->id;
-
-        return $this->service->getPublicConnection()->getUrl($endpoint, []);
     }
 
     public function loadPublicData($data = null)
@@ -132,6 +128,9 @@ class Video
         $resource = '/thumbs/'. $this->id . '-720.jpg';
         $this->image = $this->service->getPublicConnection()->getUrl($resource, [], null);
 
+        $endpoint = '/v2/media/' . $this->id;
+        $this->publicUrl = $this->service->getPublicConnection()->getUrl($endpoint, [], 4*3600, 5*60);
+
         $this->isGeneratedLoaded = true;
     }
 
@@ -140,6 +139,7 @@ class Video
     {
         $loaders = [
             'generated' => [
+                'publicUrl',
                 'image',
                 'tinyThumbnail',
                 'smallThumbnail',
