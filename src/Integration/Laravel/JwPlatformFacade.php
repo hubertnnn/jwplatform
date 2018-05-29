@@ -12,6 +12,6 @@ class JwPlatformFacade extends Facade {
      */
     protected static function getFacadeAccessor()
     {
-        return 'HubertNNN\JwPlatform\Contracts\JwPlatform'; // the IoC binding.
+        return 'HubertNNN\JwPlatform\Contracts\JwPlatformService'; // the IoC binding.
     }
 }
