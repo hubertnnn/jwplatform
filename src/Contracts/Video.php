@@ -9,6 +9,8 @@ namespace HubertNNN\JwPlatform\Contracts;
  * @property \DateTime $published
  * @property int $duration in seconds
  * @property string $publicUrl
+ * @property string $streamingUrl
+ * @property string $fallbackUrl
  * @property string $image
  * @property string $tinyThumbnail 40px
  * @property string $smallThumbnail 120px
