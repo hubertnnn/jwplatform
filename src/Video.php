@@ -138,7 +138,7 @@ class Video implements Contracts\Video
 
 
         $endpoint = '/manifests/' . $this->id . '.m3u8';
-        $this->streamingUrl = $this->service->getPublicConnection()->getUrl($endpoint, []);
+        $this->streamingUrl = $this->service->getPublicConnection()->getUrl($endpoint, [], 24*3600, 12*3600);
 
         $fallbackTemplate = $this->service->getFallbackTemplate();
         if($fallbackTemplate !== null) {

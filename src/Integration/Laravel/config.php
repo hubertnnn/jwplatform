@@ -26,4 +26,17 @@ return [
     |
     */
     'fallbackTemplate' => env('JWPLATFORM_FALLBACK_TEMPLATE'),
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | JwPlatform players
+    |--------------------------------------------------------------------------
+    |
+    | Players are used to customize how your player will look on the website
+    |
+    */
+    'players' => [
+        'default' => env('JWPLATFORM_PLAYER'),
+    ]
 ];
