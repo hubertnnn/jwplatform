@@ -80,7 +80,6 @@ class Video implements Contracts\Video
             $response = $this->service->getPublicConnection()->get($endpoint, [], 30, 10);
             $data = $response->playlist[0];
         }
-        dump($data);
 
         $this->title = $data->title;
         $this->description = $data->description;
