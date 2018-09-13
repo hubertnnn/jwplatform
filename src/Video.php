@@ -152,6 +152,10 @@ class Video implements Contracts\Video
 
     public function __get($name)
     {
+        if($name === 'id') {
+            return $this->id;
+        }
+
         $loaders = [
             'generated' => [
                 'publicUrl',
