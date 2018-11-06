@@ -22,4 +22,12 @@ interface JwPlatformService
      */
     public function createVideo($file, $title);
 
+    /**
+     * @param int $size
+     * @param string $md5
+     * @param string $title
+     * @return Video
+     */
+    public function lazyCreateVideo($size, $md5, $title);
+
 }
