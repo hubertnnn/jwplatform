@@ -67,4 +67,9 @@ class JwPlatformService implements Contracts\JwPlatformService
         return $uploader->uploadVideo($file, $title);
     }
 
+    public function lazyCreateVideo($size, $md5, $title)
+    {
+        $uploader = new Uploader($this);
+        return $uploader->lazyUploadVideo($size, $md5, $title);
+    }
 }
