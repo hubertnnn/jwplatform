@@ -28,6 +28,6 @@ interface JwPlatformService
      * @param string $title
      * @return Video
      */
-    public function lazyCreateVideo($size, $md5, $title);
+    public function lazyCreateVideo($size, $md5, $title, $method = 'single');
 
 }
