@@ -16,7 +16,7 @@ class Uploader
         $this->service = $service;
     }
 
-    public function lazyUploadVideo($size = null, $md5 = null, $title = 'New video', $method = 'single')
+    public function lazyUploadVideo($size = null, $md5 = null, $title = 'New video', $method = 'single', $contentType = null)
     {
         $endpoint = '/videos/create';
         $data = [
@@ -25,6 +25,10 @@ class Uploader
             'size' => $size,
             'md5' => $md5,
         ];
+
+        if($contentType !== null) {
+            $data['upload_content_type'] = $contentType;
+        }
 
         $response = $this->service->getPrivateConnection()->get($endpoint, $data);
 
