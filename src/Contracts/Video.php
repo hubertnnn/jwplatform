@@ -25,4 +25,5 @@ namespace HubertNNN\JwPlatform\Contracts;
 interface Video
 {
     public function save();
+    public function delete();
 }
