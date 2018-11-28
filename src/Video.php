@@ -261,4 +261,16 @@ class Video implements Contracts\Video
         $this->service->getPrivateConnection()->get($endpoint, $data);
     }
 
+    public function delete()
+    {
+        $endpoint = '/videos/delete';
+        $data = [
+            'video_key' => $this->id,
+        ];
+
+        $response = $this->service->getPrivateConnection()->get($endpoint, $data);
+
+        return $response->status === 'ok';
+    }
+
 }
