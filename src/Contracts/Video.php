@@ -26,4 +26,5 @@ interface Video
 {
     public function save();
     public function delete();
+    public function updateThumbnail($time);
 }
