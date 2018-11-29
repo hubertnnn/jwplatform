@@ -273,4 +273,17 @@ class Video implements Contracts\Video
         return $response->status === 'ok';
     }
 
+    public function updateThumbnail($time)
+    {
+        $endpoint = '/videos/thumbnails/update';
+        $data = [
+            'video_key' => $this->id,
+            'position' => $time,
+        ];
+
+        $response = $this->service->getPrivateConnection()->get($endpoint, $data);
+
+        return $response->status === 'ok';
+    }
+
 }
